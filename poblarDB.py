@@ -6,7 +6,7 @@ bd = BD()
 
 scp = True
 ben = False
-mhs = ['PSA','SCA','WOA','GWO']
+mhs = ['Gannet','Eagle'] #['PSA','SCA','WOA','GWO']
 cantidad = 0
 
 DS_actions = [
@@ -44,7 +44,7 @@ if scp:
         for mh in mhs:
             data = {}
             data['MH']          = mh
-            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:S4-ELIT,repair:complex,cros:0.9;mut:0.20'
+            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:S4-STD,repair:complex,cros:0.9;mut:0.20'
             data['ML']          = ''
             data['paramML']     = ''
             data['ML_FS']       = ''
