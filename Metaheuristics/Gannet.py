@@ -6,8 +6,8 @@ import math as mt
 
 #equaciones Exploracion
 
-def ecuacion_3 (it,maxIt): # Variable t
-    return (1 - (it/maxIt))
+def ecuacion_3 (iter,maxIt): # Variable t
+    return (1 - (iter/maxIt))
 
 def ecuacion_4 (t): # Variable a
     return (2 * mt.cos(2 * mt.pi * rand.random()) * t)
@@ -24,7 +24,7 @@ def ecuacion_6 (): # Variable V(x)
 
     return result
 
-def ecuacion_7 (it, matrizX, pobSize, t, N): # Variable (X)
+def ecuacion_7 (it, matrizX, pobSize, t, N): # Variable MX_i(t+1)
     q = rand.random()
     a = ecuacion_4(t)
     u1 = rand.uniform(-a,a)
@@ -64,8 +64,8 @@ def ecuacion_13 (it, maxIt, M, vel): # Variable Captura
     result = 1/(ecuacion_15(M, vel) * ecuacion_14(it, maxIt))
     return result
 
-def ecuacion_14(it, maxIt): # Variable t2
-    result = 1 + it/maxIt
+def ecuacion_14(iter, maxIt): # Variable t2
+    result = 1 + iter/maxIt
     return result
 
 def ecuacion_15 (M,vel): # Variable R
@@ -75,12 +75,12 @@ def ecuacion_15 (M,vel): # Variable R
 def ecuacion_16 (): # Variable L
     return 0.2 + (2 - 0.2) * rand.random()
 
-def ecuacion_17 (t, matrizX, captura, it, bestXi): # Variable MX_i (t + 1)
+def ecuacion_17 (it, matrizX, captura, t2, bestXi): # Variable MX_i (t + 1)
     c = 0.2
     if (captura >= c):
-        result = t * ecuacion_18(matrizX, captura, bestXi, it) * (matrizX[it,:] - bestXi) + matrizX[it,:]
+        result = t2 * ecuacion_18(matrizX, captura, bestXi, it) * (matrizX[it,:] - bestXi) + matrizX[it,:]
     else:
-        result = matrizX[it,:] - (matrizX[it,:] - bestXi) * ecuacion_20 * t
+        result = matrizX[it,:] - (matrizX[it,:] - bestXi) * ecuacion_20 * t2
     return result
 
 def ecuacion_18 (matrizX, captura, bestXi, it): # Variable delta
@@ -100,13 +100,14 @@ def ecuacion_20 (matrizX): # Variable P
 def iterarGannet (maxIter, iter, pop, dim, X, bestXi):
     memoriaX = X
     t = ecuacion_3(iter, maxIter)
+    t2 = ecuacion_14(iter, maxIter)
     captura = ecuacion_16()
     if (rand.random() > 0.5): # Exploracion
         for i in range(pop):
-            memoriaX[i] = ecuacion_7(iter, X, pop, t, dim) #Decision entre u-sharped o v-shaped para la exploracion
+            memoriaX[i] = ecuacion_7(i, X, pop, t, dim) #Decision entre u-sharped o v-shaped para la exploracion
     else :
         for i in range(pop): #Explotacion
-            memoriaX[i] = ecuacion_17(t, X, captura, iter, bestXi) #Decision ecuacion de captura
+            memoriaX[i] = ecuacion_17(i, X, captura, t2, bestXi) #Decision ecuacion de captura
     return memoriaX
 
 

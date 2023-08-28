@@ -6,7 +6,7 @@ bd = BD()
 
 scp = True
 ben = False
-mhs = ['Gannet','Eagle'] #['PSA','SCA','WOA','GWO']
+mhs = ['Eagle'] #['PSA','SCA','WOA','GWO', 'Gannet']
 cantidad = 0
 
 DS_actions = [
