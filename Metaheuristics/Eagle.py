@@ -23,12 +23,11 @@ def iterarEagle (pop, dim, poblacion, iter, attackPropensity, cruisePropensity):
     radius = np.linalg.norm(attackVectorInitial,ord = 2, axis = 1)
 
     #determinar la convergencia y no-convegencia 
-    auxConvergedEagles = radius.sum(axis = 0)
-    indConvergedEagles = np.in1d(auxConvergedEagles, 0)
-    convergedEagles = indConvergedEagles.nonzero()
+    indConvergedEagles = radius == 0 #Array de True y false
+    convergedEagles = indConvergedEagles.nonzero() #Indices
     
-    indUnConvergedEagles = np.invert(indConvergedEagles)
-    unConvergedEagles = indUnConvergedEagles.nonzero()
+    indUnConvergedEagles = np.invert(indConvergedEagles) #Array de True y false
+    unConvergedEagles = indUnConvergedEagles.nonzero() #Indices
     
     #inicial CruiseVector inicial
     cruiseVectorInitial = 2 * np.random.rand(pop, dim) -1
@@ -38,7 +37,7 @@ def iterarEagle (pop, dim, poblacion, iter, attackPropensity, cruisePropensity):
     cruiseVectorInitial[convergedEagles, :] = 0
     
     #determinar las constantes y variables libres
-    for i1 in unConvergedEagles:
+    for i1 in unConvergedEagles[0]:
         vConstrained = np.full((1,dim), False)
         auxIdx = (attackVectorInitial[i1,:]).ravel().nonzero()
         idx = np.random.choice(auxIdx[0])
@@ -58,9 +57,9 @@ def iterarEagle (pop, dim, poblacion, iter, attackPropensity, cruisePropensity):
 
     #Calcular el movimiento de los vectores
     #primer termino ecuacion 6
-    attackVector = np.random.rand(pop,1) * attackPropensity[iter] * radius * attackVectorInitial
+    attackVector = np.random.rand(pop,1) * attackPropensity[iter] * radius @ attackVectorInitial
     #segundo termino ecuacion 6
-    cruiseVector = np.random.rand(pop,1) * cruisePropensity[iter] * radius * cruiseVectorInitial
+    cruiseVector = np.random.rand(pop,1) * cruisePropensity[iter] * radius @ cruiseVectorInitial
 
     #vector de movimiento
     stepVector = attackVector + cruiseVector

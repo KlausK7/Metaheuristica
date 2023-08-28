@@ -124,7 +124,7 @@ def solverSCP(id, mh, maxIter, pop, instancia, DS, repairType, param):
         if mh == "Gannet":
             poblacion = iterarGannet(maxIter, iter, len(poblacion), instance.getColumns(), poblacion, Best)
         if mh == "Eagle":
-            poblacion = iterarEagle(len(poblacion), instance.getColumns(), poblacion, iter, dataEagles[0], dataEagles[1])
+            poblacion = iterarEagle(len(poblacion), instance.getColumns(), poblacion, iter, dataEagles[0].tolist(), dataEagles[1].tolist())
         
         # Binarizo, calculo de factibilidad de cada individuo y calculo del fitness
         for i in range(poblacion.__len__()):
