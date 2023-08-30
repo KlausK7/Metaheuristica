@@ -45,11 +45,11 @@ def iterarEagle (pop, dim, poblacion, iter, attackPropensity, cruisePropensity):
         vFree = np.invert(vConstrained)
         indexVFree = vFree.ravel().nonzero()
         indexVConstrained = vConstrained.ravel().nonzero()
-        cruiseVectorInitial[i1,idx] = - np.divide(sum(np.multiply(attackVectorInitial[i1,indexVFree[0]],cruiseVectorInitial[i1,indexVFree[0]]), 2), attackVectorInitial[i1,indexVConstrained])
+        cruiseVectorInitial[i1,idx] = - np.divide(sum(np.multiply(attackVectorInitial[i1,indexVFree[0]],cruiseVectorInitial[i1,indexVFree[0]]), 2), attackVectorInitial[i1,indexVConstrained], out=None)
 
     #Calcular unit vectors
-    attackVectorInitial = np.divide(attackVectorInitial, np.linalg.norm(attackVectorInitial,ord = 2, axis = 1,keepdims = True))
-    cruiseVectorInitial = np.divide(cruiseVectorInitial, np.linalg.norm(cruiseVectorInitial,ord = 2, axis = 1,keepdims = True))        
+    attackVectorInitial = np.divide(attackVectorInitial, np.linalg.norm(attackVectorInitial,ord = 2, axis = 1,keepdims = True), out=None, where=True)
+    cruiseVectorInitial = np.divide(cruiseVectorInitial, np.linalg.norm(cruiseVectorInitial,ord = 2, axis = 1,keepdims = True), out=None, where=True)        
                                             
     #correcgir vector de convergencia
     attackVectorInitial[convergedEagles,:] = 0

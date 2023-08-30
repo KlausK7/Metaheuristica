@@ -7,7 +7,7 @@ import math as mt
 #equaciones Exploracion
 
 def ecuacion_3 (iter,maxIt): # Variable t
-    return (1 - (iter/maxIt))
+    return (1 - ((iter + 1)/maxIt))
 
 def ecuacion_4 (t): # Variable a
     return (2 * mt.cos(2 * mt.pi * rand.random()) * t)
@@ -65,7 +65,7 @@ def ecuacion_13 (it, maxIt, M, vel): # Variable Captura
     return result
 
 def ecuacion_14(iter, maxIt): # Variable t2
-    result = 1 + iter/maxIt
+    result = 1 + (iter + 1)/maxIt
     return result
 
 def ecuacion_15 (M,vel): # Variable R
