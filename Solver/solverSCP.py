@@ -8,7 +8,7 @@ from Metaheuristics.WOA import iterarWOA
 from Metaheuristics.MFO import iterarMFO
 from Metaheuristics.GA import iterarGA
 from Metaheuristics.Gannet import iterarGannet
-from Metaheuristics.Eagle import iterarEagle, PropensityEagle
+from Metaheuristics.Eagle import iterarEagle, PropensityEagle, iterarEagle3
 from Diversity.hussainDiversity import diversidadHussain
 from Diversity.XPLXTP import porcentajesXLPXPT
 import time
@@ -124,7 +124,7 @@ def solverSCP(id, mh, maxIter, pop, instancia, DS, repairType, param):
         if mh == "Gannet":
             poblacion = iterarGannet(maxIter, iter, len(poblacion), instance.getColumns(), poblacion, Best)
         if mh == "Eagle":
-            poblacion = iterarEagle(len(poblacion), instance.getColumns(), poblacion, iter, dataEagles[0].tolist(), dataEagles[1].tolist())
+            poblacion = iterarEagle3(len(poblacion), instance.getColumns(), poblacion, iter, dataEagles[0].tolist(), dataEagles[1].tolist(),instance.fitness)
         
         # Binarizo, calculo de factibilidad de cada individuo y calculo del fitness
         for i in range(poblacion.__len__()):

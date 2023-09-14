@@ -4,9 +4,9 @@ import json
 bd = BD()
 
 
-scp = True
-ben = False
-mhs = ['Gannet'] #['PSA','SCA','WOA','GWO', 'Gannet']
+scp = False
+ben = True
+mhs = ['Eagle'] #['PSA','SCA','WOA','GWO', 'Gannet','Eagle']]
 cantidad = 0
 
 DS_actions = [
@@ -57,11 +57,11 @@ if scp:
 if ben:
     # poblar ejecuciones Benchmark
     instancias = bd.obtenerInstancias(f'''
-                                      "F1","F2"
+                                      "F1"
                                       ''')
-    iteraciones = 500
-    experimentos = 2
-    poblacion = 10
+    iteraciones = 1000
+    experimentos = 1
+    poblacion = 50
     for instancia in instancias:
         for mh in mhs:
             data = {}
