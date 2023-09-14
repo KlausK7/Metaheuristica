@@ -4,8 +4,8 @@ import json
 bd = BD()
 
 
-scp = False
-ben = True
+scp = True
+ben = False
 mhs = ['Eagle'] #['PSA','SCA','WOA','GWO', 'Gannet','Eagle']]
 cantidad = 0
 
@@ -44,7 +44,7 @@ if scp:
         for mh in mhs:
             data = {}
             data['MH']          = mh
-            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:S4-STD,repair:complex,cros:0.9;mut:0.20'
+            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:V2-STD,repair:complex,cros:0.9;mut:0.20'
             data['ML']          = ''
             data['paramML']     = ''
             data['ML_FS']       = ''

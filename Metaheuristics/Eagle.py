@@ -6,8 +6,8 @@ from Problem.Benchmark.Problem import fitness as f
 
 
 def PropensityEagle (maxIter): # Variables propension de la aguila en atacar y cruce
-    propenAttack = [0.1, 4]
-    propenCruise = [3, 0.1]
+    propenAttack = [0.1, 5]
+    propenCruise = [4, 0.1]
     propenEagle = []
     propenEagle.append(np.linspace(propenAttack[0], propenAttack[1], maxIter))
     propenEagle.append(np.linspace(propenCruise[0], propenCruise[1], maxIter))
