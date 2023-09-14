@@ -73,7 +73,7 @@ def iterarEagle (pop, dim, poblacion, iter, attackPropensity, cruisePropensity):
     #Calcular nuevo x
     return poblacion + stepVector
 
-def iterarEagle2 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity, func):
+def iterarEagle2 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity, func): # Benchmark
     for eagle in range(pop):    
         indRand = ran.randint(0,pop-1) # Seleccionar aguila aleatoria
         
@@ -83,7 +83,7 @@ def iterarEagle2 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity,
         #Calcular radio
         radio = np.linalg.norm(vectorAttack,2)
         
-        #vector de cruce ecuacion 4 sin la modificacion C_k
+        #vector de cruce ecuacion 5 sin la modificacion C_k
         cruiseVectorInitial = 2 * np.random.rand(dim) -1
         if radio != 0: 
             vConstrained = np.full((dim), False)
@@ -100,33 +100,33 @@ def iterarEagle2 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity,
             #cruiseVectorInitial[idx] = - np.divide(sum(np.multiply(vectorAttack[indexVFree[0]],cruiseVectorInitial[indexVFree[0]]), 2), vectorAttack[indexVConstrained[0]])
             cruiseVectorInitial[idx] -=  np.divide(sum(vectorAttack[indexVFree[0]], 2), vectorAttack[indexVConstrained[0]])
         
-        #Calcular unit vectors
-        vectorAttack = np.divide(vectorAttack, np.linalg.norm(vectorAttack,2), out=None, where=True)
-        cruiseVectorInitial = np.divide(cruiseVectorInitial, np.linalg.norm(cruiseVectorInitial,2), out=None, where=True)      
-        
-        #Calcular el movimiento de los vectores
-        #primer termino ecuacion 6
-        attackVector = ran.random() * attackPropensity[iter] * vectorAttack
-        #segundo termino ecuacion 6
-        cruiseVector = ran.random() * cruisePropensity[iter] * cruiseVectorInitial
-        
-        #vector de movimiento ecuacion 6
-        stepVector = attackVector + cruiseVector
-        
-        #Aguila en movimiento ecuacion 8
-        eagleStep = poblacion[eagle] + stepVector
-        
-        #Calcular fitnness
-        fitnnessEagles = f(func,poblacion[eagle])
-        fitnnessEaglesStep = f(func,eagleStep)
+            #Calcular unit vectors
+            vectorAttack = np.divide(vectorAttack, np.linalg.norm(vectorAttack,2), out=None, where=True)
+            cruiseVectorInitial = np.divide(cruiseVectorInitial, np.linalg.norm(cruiseVectorInitial,2), out=None, where=True)      
             
-        #Reemplazar Eagles
-        if fitnnessEagles > fitnnessEaglesStep:
-            poblacion[eagle] = eagleStep
-    
+            #Calcular el movimiento de los vectores
+            #primer termino ecuacion 6
+            attackVector = ran.random() * attackPropensity[iter] * vectorAttack
+            #segundo termino ecuacion 6
+            cruiseVector = ran.random() * cruisePropensity[iter] * cruiseVectorInitial
+            
+            #vector de movimiento ecuacion 6
+            stepVector = attackVector + cruiseVector
+            
+            #Aguila en movimiento ecuacion 8
+            eagleStep = poblacion[eagle] + stepVector
+            
+            #Calcular fitnness
+            fitnnessEagles = f(func,poblacion[eagle])
+            fitnnessEaglesStep = f(func,eagleStep)
+                
+            #Reemplazar Eagles
+            if fitnnessEagles > fitnnessEaglesStep:
+                poblacion[eagle] = eagleStep
+        
     return poblacion
 
-def iterarEagle3 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity, funcion):
+def iterarEagle3 (pop, dim, poblacion, iter, attackPropensity, cruisePropensity, funcion): # Problemas SCP
     for eagle in range(pop):    
         indRand = ran.randint(0,pop-1) # Seleccionar aguila aleatoria
         
