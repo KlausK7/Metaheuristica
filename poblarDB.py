@@ -4,8 +4,8 @@ import json
 bd = BD()
 
 
-scp = True
-ben = False
+scp = False
+ben = True
 mhs = ['Eagle'] #['PSA','SCA','WOA','GWO', 'Gannet','Eagle']]
 cantidad = 0
 
@@ -33,7 +33,7 @@ paramsML = json.dumps({
 if scp:
     # poblar ejecuciones SCP
     instancias = bd.obtenerInstancias(f'''
-                                      'scp410'
+                                      'scp41'
                                       ''')
     print(instancias)
     iteraciones = 1000
@@ -44,7 +44,7 @@ if scp:
         for mh in mhs:
             data = {}
             data['MH']          = mh
-            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:V2-STD,repair:complex,cros:0.9;mut:0.20'
+            data['paramMH']     = f'iter:{str(iteraciones)},pop:{str(poblacion)},DS:S1-COM,repair:complex,cros:0.9;mut:0.20'
             data['ML']          = ''
             data['paramML']     = ''
             data['ML_FS']       = ''
@@ -60,7 +60,7 @@ if ben:
                                       "F1"
                                       ''')
     iteraciones = 1000
-    experimentos = 1
+    experimentos = 3
     poblacion = 50
     for instancia in instancias:
         for mh in mhs:
