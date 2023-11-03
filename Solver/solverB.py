@@ -1,5 +1,7 @@
 import time
 import numpy as np
+from Metaheuristics.Gannet import iterarGannet
+from Metaheuristics.Eagle import iterarEagle, PropensityEagle, iterarEagle2
 from Diversity.hussainDiversity import diversidadHussain
 from Diversity.XPLXTP import porcentajesXLPXPT
 from Problem.Benchmark.Problem import fitness as f
@@ -80,6 +82,9 @@ def solverB(id, mh, maxIter, pop, function, lb, ub, dim):
         f'0,{str(BestFitness)},{str(round(tiempoInicializacion2-tiempoInicializacion1,3))},{str(XPL)},{str(XPT)},{maxDiversidad}\n'
     )
     
+    if mh == "Eagle":
+        dataEagles = PropensityEagle(maxIter)
+    
     for iter in range(0, maxIter):
         # obtengo mi tiempo inicial
         timerStart = time.time()
@@ -95,13 +100,17 @@ def solverB(id, mh, maxIter, pop, function, lb, ub, dim):
             poblacion = iterarWOA(maxIter, iter, dim, poblacion.tolist(), Best.tolist())
         if mh == 'PSA':
             poblacion = iterarPSA(maxIter, iter, dim, poblacion.tolist(), Best.tolist())
+        if mh == "Gannet":
+            poblacion = iterarGannet(maxIter, iter, len(poblacion), dim, poblacion, Best)
+        if mh == "Eagle":
+            poblacion = iterarEagle2(len(poblacion), dim, poblacion, iter, dataEagles[0].tolist(), dataEagles[1].tolist(),function) #,function    
         
         # calculo de factibilidad de cada individuo y calculo del fitness inicial
         for i in range(poblacion.__len__()):
             for j in range(dim):
                 poblacion[i, j] = np.clip(poblacion[i, j], lb[j], ub[j])            
 
-            fitness[i] = f(function, poblacion[i])
+            fitness[ i]= f(function, poblacion[i])
             
         solutionsRanking = np.argsort(fitness) # rankings de los mejores fitness
         

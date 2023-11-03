@@ -12,10 +12,10 @@ instancia       = ''
 problema        = ''
 mh              = ''
 parametrosMH    = ''
-maxIter         = 0
-pop             = 0
+maxIter         = ''
+pop             = ''
 ds              = []
-clasificador    = ''
+clasificador    = ''    
 parametrosC     = '' 
 
 pruebas = 1
@@ -31,7 +31,7 @@ while len(data) > 0:
     
     problema = datosInstancia[0][1]
     instancia = datosInstancia[0][2]
-    parametrosInstancia = datosInstancia[0][4]
+    parametrosInstancia = datosInstancia[0][4] 
     mh = data[0][1]
     parametrosMH = data[0][2]
     ml = data[0][3]
@@ -67,5 +67,3 @@ print("-------------------------------------------------------")
 print("-------------------------------------------------------")
 print("Se han ejecutado todos los experimentos pendientes.")
 print("-------------------------------------------------------")
-print("-------------------------------------------------------")
-

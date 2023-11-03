@@ -84,13 +84,13 @@ def X3(dimension):
 def X4(dimension):
     return np.divide( 1 , ( 1 + np.exp( np.divide( dimension , 3 ) ) ) )
 def Z1(dimension):
-    return np.power( ( 1 - np.power( 2 , dimension ) ) , 0.5 )
+    return np.power( ( 1 - np.power( 2 , dimension, dtype=complex ) ) , 0.5 )
 def Z2(dimension):
-    return np.power( ( 1 - np.power( 5 , dimension ) ) , 0.5 )
+    return np.power( ( 1 - np.power( 5 , dimension, dtype=complex  ) ) , 0.5 )
 def Z3(dimension):
-    return np.power( ( 1 - np.power( 8 , dimension ) ) , 0.5 )
+    return np.power( ( 1 - np.power( 8 , dimension, dtype=complex  ) ) , 0.5 )
 def Z4(dimension):
-    return np.power( ( 1 - np.power( 20 , dimension ) ) , 0.5 )
+    return np.power( ( 1 - np.power( 20 , dimension, dtype=complex  ) ) , 0.5 )
 
 def Standard(step1):
     rand = random.uniform(0.0, 1.0)
