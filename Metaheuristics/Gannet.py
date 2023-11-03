@@ -3,6 +3,7 @@ import random as rand
 import numpy.matlib as npmat 
 import math as mt
 
+### Numero de ecuaciones y nombres son los mismos del paper de Gannet ###
 
 #equaciones Exploracion
 
@@ -101,8 +102,10 @@ def ecuacion_20 (): # Variable P ecuacion 19
 ### Funcion Principal loop iteraciones ###
 def iterarGannet (maxIter, iter, pop, dim, X, bestXi):
     memoriaX = X
+    ### Variables para definir capacidad de captura ###
     M = 2.5
     vel = 1.5
+    ### ----------- ###
     t = ecuacion_3(iter, maxIter)
     t2 = ecuacion_14(iter, maxIter)
     captura = ecuacion_13(t2)
